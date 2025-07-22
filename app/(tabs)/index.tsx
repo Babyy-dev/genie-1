@@ -15,15 +15,10 @@ import { BlurView } from 'expo-blur';
 import { useAnimatedStyle, AnimatedStyle } from 'react-native-reanimated';
 import Animated from 'react-native-reanimated';
 import { Home, Navigation, Star, Send, LayoutGrid } from 'lucide-react-native';
-import { useRouter } from 'expo-router';
 import { useFluidCursorTrail } from '@/hooks/useFluidCursorTrail';
-
-const { width: SCREEN_WIDTH } = Dimensions.get('window');
 
 // Main Home Screen Component
 export default function HomeScreen() {
-  const router = useRouter();
-
   const {
     isTrailActive,
     cursorX,
@@ -33,6 +28,7 @@ export default function HomeScreen() {
     panResponder,
   } = useFluidCursorTrail();
 
+  // Animated style for the main cursor blob
   const mainCursorStyle = useAnimatedStyle(() => {
     return {
       transform: [
@@ -44,6 +40,7 @@ export default function HomeScreen() {
     };
   });
 
+  // Animated styles for the trailing elements
   const getTrailStyle = (index: number) =>
     useAnimatedStyle(() => {
       const element = trailElements[index];
@@ -60,13 +57,13 @@ export default function HomeScreen() {
 
   return (
     <ImageBackground
-      source={require('@/assets/images/image-2.png')}
+      source={require('@/assets/images/image-2.jpg')}
       style={styles.screenContainer}
-      {...panResponder.panHandlers}
+      {...panResponder.panHandlers} // This makes the whole screen interactive
     >
       <StatusBar style="light" />
       <View style={styles.overlay}>
-        {/* === UPPER PART OF UI === */}
+        {/* === UPPER UI PART === */}
         <View style={styles.header}>
           <Text style={styles.headerTitle}>Genie</Text>
           <TouchableOpacity>
@@ -202,7 +199,7 @@ const styles = StyleSheet.create({
   },
   card: {
     marginHorizontal: 20,
-    borderRadius: 20,
+    borderRadius: 99, // Pill shape
     overflow: 'hidden',
     borderWidth: 1,
     borderColor: 'rgba(255, 255, 255, 0.1)',
@@ -225,7 +222,9 @@ const styles = StyleSheet.create({
     marginTop: 20,
     flexDirection: 'row',
     alignItems: 'center',
-    padding: 16,
+    paddingVertical: 8,
+    paddingLeft: 8,
+    paddingRight: 16,
   },
   profileImage: {
     width: 36,

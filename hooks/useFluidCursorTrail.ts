@@ -1,3 +1,4 @@
+// hooks/useFluidCursorTrail.ts
 import { useState } from 'react';
 import { PanResponder, Dimensions } from 'react-native';
 import {
@@ -30,26 +31,22 @@ export const useFluidCursorTrail = () => {
       const { locationX, locationY } = evt.nativeEvent;
       cursorX.value = locationX;
       cursorY.value = locationY;
-
       trailElements.forEach((element, index) => {
         element.scale.value = withSpring(1, { damping: 15, stiffness: 200 });
         element.opacity.value = withTiming(0.8 - index * 0.08, {
           duration: 100 + index * 50,
         });
       });
-
       isStretching.value = withSpring(1, { damping: 12, stiffness: 300 });
     },
     onPanResponderMove: (evt) => {
       const { locationX, locationY } = evt.nativeEvent;
       cursorX.value = locationX;
       cursorY.value = locationY;
-
       trailElements.forEach((element, index) => {
         const delay = (index + 1) * 50;
         const tension = 80 - index * 8;
         const friction = 6 + index * 2;
-
         setTimeout(() => {
           element.x.value = withSpring(locationX, {
             damping: friction,
@@ -61,7 +58,6 @@ export const useFluidCursorTrail = () => {
           });
         }, delay);
       });
-
       isStretching.value = withSpring(1.3, { damping: 8, stiffness: 400 });
       setTimeout(() => {
         isStretching.value = withSpring(1, { damping: 12, stiffness: 300 });
@@ -72,9 +68,7 @@ export const useFluidCursorTrail = () => {
         element.scale.value = withTiming(0, { duration: 200 + index * 30 });
         element.opacity.value = withTiming(0, { duration: 200 + index * 30 });
       });
-
       isStretching.value = withSpring(0, { damping: 15, stiffness: 200 });
-
       setTimeout(() => {
         runOnJS(setIsTrailActive)(false);
       }, 500);

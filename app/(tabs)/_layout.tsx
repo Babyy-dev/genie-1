@@ -1,6 +1,6 @@
 import { Tabs } from 'expo-router';
 import { BlurView } from 'expo-blur';
-import { Chrome as Home, User } from 'lucide-react-native';
+import { Chrome as Home } from 'lucide-react-native';
 
 export default function TabLayout() {
   return (
@@ -22,27 +22,22 @@ export default function TabLayout() {
         tabBarActiveTintColor: '#FFFFFF',
         tabBarInactiveTintColor: '#666666',
         tabBarBackground: () => (
-          <BlurView intensity={20} tint="dark" style={{ flex: 1, borderRadius: 20 }} />
+          <BlurView
+            intensity={20}
+            tint="dark"
+            style={{ flex: 1, borderRadius: 20 }}
+          />
         ),
-      }}>
+      }}
+    >
       <Tabs.Screen
         name="index"
         options={{
           title: 'Home',
-          tabBarIcon: ({ size, color }) => (
-            <Home size={size} color={color} />
-          ),
+          tabBarIcon: ({ size, color }) => <Home size={size} color={color} />,
         }}
       />
-      <Tabs.Screen
-        name="profile"
-        options={{
-          title: 'Profile',
-          tabBarIcon: ({ size, color }) => (
-            <User size={size} color={color} />
-          ),
-        }}
-      />
+      {/* The Profile screen tab has been removed */}
     </Tabs>
   );
 }

@@ -1,4 +1,3 @@
-// hooks/useFluidCursorTrail.ts
 import { useState } from 'react';
 import { PanResponder, Dimensions } from 'react-native';
 import {

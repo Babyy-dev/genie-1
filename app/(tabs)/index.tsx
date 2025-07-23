@@ -57,7 +57,7 @@ export default function HomeScreen() {
 
   return (
     <ImageBackground
-      source={require('@/assets/images/image-2.jpg')}
+      source={require('@/assets/images/image-2.png')}
       style={styles.screenContainer}
       {...panResponder.panHandlers} // This makes the whole screen interactive
     >
@@ -99,7 +99,7 @@ export default function HomeScreen() {
   );
 }
 
-// --- UI Components to match image-2.jpg ---
+// --- UI Components ---
 const NotificationCard = () => (
   <BlurView
     intensity={25}
